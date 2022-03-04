@@ -14,13 +14,17 @@ const ArrowButton: FC<
   );
 };
 
-const NavigationBar: FC = () => {
+interface NavigationBarProps {
+  filename: string;
+}
+
+const NavigationBar: FC<NavigationBarProps> = ({ filename }) => {
   return (
     <section className="absolute flex justify-between items-center bottom-9 bg-white h-14 w-[80%] left-[10%] p-3">
       <ArrowButton disabled>
         <BackArrow />
       </ArrowButton>
-      <span className="text-sm">filename</span>
+      <span className="text-sm">{filename}</span>
       <ArrowButton>
         <Arrow />
       </ArrowButton>
