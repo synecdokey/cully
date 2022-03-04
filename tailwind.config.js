@@ -7,6 +7,7 @@ module.exports = {
         "brand-ui-6": "#f2f2f2",
         "black-ui": "#1c1c1c",
         "grey-ui": "#828282",
+        "disabled-ui": "#909090",
         "light-grey-ui": "#e2e2e3",
         "red-ui": "#eb5757",
       },

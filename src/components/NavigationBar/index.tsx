@@ -1,11 +1,12 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, FC } from "react";
+import Arrow, { BackArrow } from "../Arrow";
 
 const ArrowButton: FC<
   DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 > = ({ children, ...props }) => {
   return (
     <button
-      className="rounded-sm h-[30px] w-[30px] hover:bg-brand-ui-6 disabled:hover:bg-transparent"
+      className="rounded-sm h-[30px] grid place-items-center w-[30px] text-black-ui hover:bg-brand-ui-6 disabled:hover:bg-transparent disabled:text-light-grey-ui"
       {...props}
     >
       {children}
@@ -16,9 +17,13 @@ const ArrowButton: FC<
 const NavigationBar: FC = () => {
   return (
     <section className="absolute flex justify-between items-center bottom-9 bg-white h-14 w-[80%] left-[10%] p-3">
-      <ArrowButton disabled>back</ArrowButton>
+      <ArrowButton disabled>
+        <BackArrow />
+      </ArrowButton>
       <span className="text-sm">filename</span>
-      <ArrowButton>fwd</ArrowButton>
+      <ArrowButton>
+        <Arrow />
+      </ArrowButton>
     </section>
   );
 };
