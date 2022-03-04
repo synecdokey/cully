@@ -1,11 +1,13 @@
-const App = () => {
+import { FC } from "react";
+import NavigationBar from "./components/NavigationBar";
+
+const App: FC = () => {
   return (
     <main className="w-full bg-off-white h-screen">
-      <img
-        src="/img.jpg"
-        alt=""
-        className="max-w-[85%] max-h-[100vh] mx-auto py-5"
-      />
+      <div className="max-w-[85%] max-h-[100vh] mx-auto py-5 relative">
+        <img src="/img.jpg" alt="" />
+        <NavigationBar />
+      </div>
     </main>
   );
 };
