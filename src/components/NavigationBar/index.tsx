@@ -4,12 +4,16 @@ import NavigationButton from "../NavigationButton";
 
 interface NavigationBarProps {
   filename: string;
+  hasPrev?: boolean;
+  hasNext?: boolean;
   onPrev(): void;
   onNext(): void;
 }
 
 const NavigationBar: FC<NavigationBarProps> = ({
   filename,
+  hasPrev,
+  hasNext,
   onPrev,
   onNext,
 }) => {
@@ -28,12 +32,12 @@ const NavigationBar: FC<NavigationBarProps> = ({
   }, [onPrev, onNext]);
 
   return (
-    <section className="absolute flex justify-between items-center bottom-9 bg-white h-14 w-[80%] left-[10%] p-3">
-      <NavigationButton disabled onClick={onPrev}>
+    <section className="absolute flex justify-between items-center bottom-9 bg-white h-14 w-[80%] left-[10%] p-3 z-20">
+      <NavigationButton onClick={onPrev} disabled={!hasPrev}>
         <BackArrow />
       </NavigationButton>
       <span className="text-sm">{filename}</span>
-      <NavigationButton onClick={onNext}>
+      <NavigationButton onClick={onNext} disabled={!hasNext}>
         <Arrow />
       </NavigationButton>
     </section>
