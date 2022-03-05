@@ -1,4 +1,6 @@
-import { FC } from "react";
+import { Root, Trigger } from "@radix-ui/react-context-menu";
+import { FC, useRef } from "react";
+import ContextMenu from "../ContextMenu";
 
 interface FaceBoxProps {
   id: string;
@@ -9,17 +11,25 @@ interface FaceBoxProps {
 }
 
 const FaceBox: FC<FaceBoxProps> = ({ xmin, ymin, xmax, ymax }) => {
+  const ref = useRef<SVGRectElement>(null);
+
   return (
-    <rect
-      className="border-black border-5 border-solid"
-      x={xmin}
-      y={ymin}
-      width={xmax - xmin}
-      height={ymax - ymin}
-      stroke="white"
-      strokeWidth="0.003"
-      fill="transparent"
-    />
+    <Root>
+      <Trigger asChild>
+        <rect
+          className="cursor-grab"
+          ref={ref}
+          x={xmin}
+          y={ymin}
+          width={xmax - xmin}
+          height={ymax - ymin}
+          stroke="white"
+          strokeWidth="0.003"
+          fill="transparent"
+        />
+      </Trigger>
+      <ContextMenu />
+    </Root>
   );
 };
 
