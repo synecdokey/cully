@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import useSWR from "swr";
-import FaceBox from "./components/FaceBox";
 import FaceContainer from "./components/FaceContainer";
 import NavigationBar from "./components/NavigationBar";
 import fetcher from "./utils/fetcher";
@@ -44,17 +43,7 @@ const App: FC = () => {
             onNext={onNext}
             onPrev={onPrev}
           />
-          <FaceContainer id={data[currentIndex].id}>
-            <FaceBox
-              {...{
-                id: "392614b3e2f146c9a0c9d643d8b8450f",
-                xmin: 0.2488081455230713,
-                ymin: 0.28436192870140076,
-                ymax: 0.5191940665245056,
-                xmax: 0.35970163345336914,
-              }}
-            />
-          </FaceContainer>
+          <FaceContainer id={data[currentIndex].id} />
         </div>
       </div>
     </main>

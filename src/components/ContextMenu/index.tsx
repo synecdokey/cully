@@ -21,7 +21,11 @@ const Action: FC<ActionProps> = ({ destructive, ...props }) => (
   </Item>
 );
 
-const ContextMenu: FC = () => {
+interface ContextMenuProps {
+  onDelete(): void;
+}
+
+const ContextMenu: FC<ContextMenuProps> = ({ onDelete }) => {
   return (
     <Content className="text-grey-ui text-sm bg-white w-40 rounded-sm py-1 absolute z-10">
       <Action>Dummy Item</Action>
@@ -29,7 +33,9 @@ const ContextMenu: FC = () => {
       <Separator className="h-[1px] bg-light-grey-ui my-1" />
       <Action>Fake News</Action>
       <Separator className="h-[1px] bg-light-grey-ui my-1" />
-      <Action destructive>Delete Frame</Action>
+      <Action destructive onClick={onDelete}>
+        Delete Frame
+      </Action>
     </Content>
   );
 };

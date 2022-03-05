@@ -8,9 +8,17 @@ export interface FaceBoxProps {
   ymin: number;
   xmax: number;
   ymax: number;
+  onDelete: (id: string) => void;
 }
 
-const FaceBox: FC<FaceBoxProps> = ({ xmin, ymin, xmax, ymax }) => {
+const FaceBox: FC<FaceBoxProps> = ({
+  onDelete,
+  id,
+  xmin,
+  ymin,
+  xmax,
+  ymax,
+}) => {
   const ref = useRef<SVGRectElement>(null);
 
   return (
@@ -28,7 +36,7 @@ const FaceBox: FC<FaceBoxProps> = ({ xmin, ymin, xmax, ymax }) => {
           fill="transparent"
         />
       </Trigger>
-      <ContextMenu />
+      <ContextMenu onDelete={() => onDelete(id)} />
     </Root>
   );
 };

@@ -8,11 +8,18 @@ interface FaceContainerProps {
   id: string;
 }
 
-const FaceContainer: FC<FaceContainerProps> = ({ children, id }) => {
-  const { data } = useSWR<FaceBoxProps[]>(
+const FaceContainer: FC<FaceContainerProps> = ({ id }) => {
+  const { data, mutate } = useSWR<FaceBoxProps[]>(
     `https://cully-api.herokuapp.com/images/${id}/faces`,
     fetcher
   );
+
+  const onDelete = (idToDelete: string) => {
+    mutate(
+      data?.filter(({ id }) => id !== idToDelete),
+      false
+    );
+  };
 
   return data ? (
     <svg
@@ -21,7 +28,7 @@ const FaceContainer: FC<FaceContainerProps> = ({ children, id }) => {
       preserveAspectRatio="none"
     >
       {data.map((props) => (
-        <FaceBox {...props} key={props.id} />
+        <FaceBox {...props} key={props.id} onDelete={onDelete} />
       ))}
     </svg>
   ) : null;
