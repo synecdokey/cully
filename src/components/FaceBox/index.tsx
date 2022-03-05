@@ -2,7 +2,7 @@ import { Root, Trigger } from "@radix-ui/react-context-menu";
 import { FC, useRef } from "react";
 import ContextMenu from "../ContextMenu";
 
-interface FaceBoxProps {
+export interface FaceBoxProps {
   id: string;
   xmin: number;
   ymin: number;

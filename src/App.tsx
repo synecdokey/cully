@@ -3,6 +3,7 @@ import useSWR from "swr";
 import FaceBox from "./components/FaceBox";
 import FaceContainer from "./components/FaceContainer";
 import NavigationBar from "./components/NavigationBar";
+import fetcher from "./utils/fetcher";
 
 interface ImageAPI {
   id: string;
@@ -11,10 +12,6 @@ interface ImageAPI {
 }
 
 const App: FC = () => {
-  const fetcher = (...args) =>
-    fetch(...args)
-      .then((res) => res.json())
-      .then((json) => json.data);
   const { data } = useSWR<ImageAPI[]>(
     "https://cully-api.herokuapp.com/images",
     fetcher
@@ -47,7 +44,7 @@ const App: FC = () => {
             onNext={onNext}
             onPrev={onPrev}
           />
-          <FaceContainer>
+          <FaceContainer id={data[currentIndex].id}>
             <FaceBox
               {...{
                 id: "392614b3e2f146c9a0c9d643d8b8450f",
