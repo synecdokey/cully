@@ -17,8 +17,9 @@ const App: FC = () => {
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
+
   const onNext = () => {
-    if (data && currentIndex < data.length) {
+    if (data && currentIndex < data.length - 1) {
       setCurrentIndex((i) => i + 1);
       if (currentIndex > maxIndex) {
         setMaxIndex((i) => i + 1);
@@ -39,7 +40,8 @@ const App: FC = () => {
           <img src={data[currentIndex].url} alt="" />
           <NavigationBar
             filename={data[currentIndex].filename}
-            hasNext={currentIndex < data.length}
+            hasNext={currentIndex < data.length - 1}
+            hasPrev={currentIndex > 0}
             onNext={onNext}
             onPrev={onPrev}
           />
