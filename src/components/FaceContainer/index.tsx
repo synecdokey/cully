@@ -1,7 +1,7 @@
 import { FC } from "react";
 import useSWR from "swr";
 import fetcher from "../../utils/fetcher";
-import FaceBox, { FaceBoxProps } from "../FaceBox";
+import FaceBox, { FaceBoxCoordinates } from "../FaceBox";
 
 interface FaceContainerProps {
   /* Image ID */
@@ -9,7 +9,7 @@ interface FaceContainerProps {
 }
 
 const FaceContainer: FC<FaceContainerProps> = ({ id }) => {
-  const { data, mutate } = useSWR<FaceBoxProps[]>(
+  const { data, mutate } = useSWR<FaceBoxCoordinates[]>(
     `https://cully-api.herokuapp.com/images/${id}/faces`,
     fetcher
   );
@@ -21,6 +21,13 @@ const FaceContainer: FC<FaceContainerProps> = ({ id }) => {
     );
   };
 
+  const updateCoordinates = (newBox: FaceBoxCoordinates) => {
+    mutate(
+      data?.map((props) => (props.id === id ? newBox : props)),
+      false
+    );
+  };
+
   return data ? (
     <svg
       className="absolute top-0 left-0 w-full h-full"
@@ -28,7 +35,12 @@ const FaceContainer: FC<FaceContainerProps> = ({ id }) => {
       preserveAspectRatio="none"
     >
       {data.map((props) => (
-        <FaceBox {...props} key={props.id} onDelete={onDelete} />
+        <FaceBox
+          {...props}
+          key={props.id}
+          onDelete={onDelete}
+          updateCoordinates={updateCoordinates}
+        />
       ))}
     </svg>
   ) : null;
