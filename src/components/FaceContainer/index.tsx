@@ -11,7 +11,14 @@ interface FaceContainerProps {
 const FaceContainer: FC<FaceContainerProps> = ({ id }) => {
   const { data, mutate } = useSWR<FaceBoxCoordinates[]>(
     `https://cully-api.herokuapp.com/images/${id}/faces`,
-    fetcher
+    fetcher,
+    // Note: this is just to make the cache work within the constraints of the
+    // exercise
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnMount: false,
+    }
   );
 
   const onDelete = (idToDelete: string) => {
