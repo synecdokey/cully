@@ -1,7 +1,5 @@
-import { Fetcher } from "swr";
-
-const fetcher = (...args) =>
-  fetch(...args)
+const fetcher = async (input: RequestInfo, init: RequestInit) =>
+  fetch(input, init)
     .then((res) => res.json())
     .then((json) => json.data);
 
