@@ -1,8 +1,9 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import useSWR from "swr";
 import FaceContainer from "./components/FaceContainer";
 import NavigationBar from "./components/NavigationBar";
 import fetcher from "./utils/fetcher";
+import preloadImage from "./utils/preload";
 
 interface ImageAPI {
   id: string;
@@ -17,13 +18,16 @@ const App: FC = () => {
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
+  useEffect(() => {
+    if (data && currentIndex >= maxIndex && maxIndex < data.length - 1) {
+      preloadImage(data[maxIndex + 1].url);
+      setMaxIndex((i) => i + 1);
+    }
+  }, [data, currentIndex, maxIndex]);
 
   const onNext = () => {
     if (data && currentIndex < data.length - 1) {
       setCurrentIndex((i) => i + 1);
-      if (currentIndex > maxIndex) {
-        setMaxIndex((i) => i + 1);
-      }
     }
   };
 
