@@ -23,7 +23,7 @@ const FaceContainer: FC<FaceContainerProps> = ({ id }) => {
 
   const updateCoordinates = (newBox: FaceBoxCoordinates) => {
     mutate(
-      data?.map((props) => (props.id === id ? newBox : props)),
+      data?.map((props) => (props.id === newBox.id ? newBox : props)),
       false
     );
   };

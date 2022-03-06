@@ -68,7 +68,7 @@ const FaceBox: FC<FaceBoxProps> = ({
         xmin: x,
         xmax: x + ref.current.width.baseVal.value,
         ymin: y,
-        ymax: x + ref.current.height.baseVal.value,
+        ymax: y + ref.current.height.baseVal.value,
       });
   };
 
